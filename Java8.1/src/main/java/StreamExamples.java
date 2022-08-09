@@ -13,9 +13,17 @@ public class StreamExamples {
         users.add(user2);
         users.add(user3);
         Stream<User> myStream = users.stream();
+        System.out.println(users);
 
         //2
         Stream<User> anotherStream = Stream.generate(()->User.createUser()).limit(3);
 
+        myStream.filter(val -> val.getAge() > 50).forEach(val -> System.out.println(val));
+
+
+        users.stream().map(val -> {val.setAge(val.getAge() * 2);
+            return val;
+        })
+                .forEach((val -> System.out.println(val)));
     }
 }
