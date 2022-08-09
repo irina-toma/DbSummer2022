@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class StreamExamples {
@@ -25,5 +27,16 @@ public class StreamExamples {
             return val;
         })
                 .forEach((val -> System.out.println(val)));
+
+        Optional<User> last = users.stream().reduce((a, b) -> b);
+        last.ifPresent( (value) -> System.out.println(value));
+
+        Comparator<User> comparator = (a, b) -> a.getAge() - b.getAge();
+
+        Optional<User> youngest = users.stream().min(comparator);
+        youngest.ifPresent((value) -> System.out.println(value));
+
+        Optional<User> oldest = users.stream().max(comparator);
+        oldest.ifPresent((value) -> System.out.println(value));
     }
 }
